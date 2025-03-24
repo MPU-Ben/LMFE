@@ -1,12 +1,9 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, precision_score, \
-    log_loss, \
-    classification_report, \
     confusion_matrix, \
     roc_auc_score, \
     average_precision_score, \
-    auc, \
     roc_curve, f1_score, recall_score, matthews_corrcoef, auc, precision_recall_curve
 def evaluate(args):
 
@@ -84,7 +81,7 @@ def evaluateByOtherSpeice(args):
 
     scale_otherspeice = StandardScaler()
     X_otherspeice_=scale_otherspeice.fit_transform(X_otherspeice)
-    ensure.evalModel(X_otherspeice_, y_otherspeice, specieName, subfold, feature_names)
+    evalModel(X_otherspeice_, y_otherspeice, specieName, subfold, feature_names)
 
 roc_aucs = []
 fprs = []
@@ -133,18 +130,15 @@ def evalModel(X, y, specieName, subfold, feature_names):
     recalls.append(recall)
     # 处理预测概率
     if y_proba.ndim == 1:
-        non_coding_probability =  y_proba  # 非编码类的概率
-        coding_probability = 1 - y_proba  # 编码类的概率
+        non_coding_probability =  y_proba
+        coding_probability = 1 - y_proba
     else:
-        non_coding_probability = y_proba[:, 0]  # 非编码类的概率
-        coding_probability = y_proba[:, 1]  # 编码类的概率
-    # 将概率格式化为字符串
+        non_coding_probability = y_proba[:, 0]
+        coding_probability = y_proba[:, 1]
     noncoding_probability = [f"{p:.8f}" for p in non_coding_probability]
     coding_probability = [f"{p:.8f}" for p in coding_probability]
-    # 将标签转换为 noncoding 和 coding
     true_label = ['noncoding' if label == 1 else 'coding' for label in y]
     prediction_label = ['noncoding' if label == 1 else 'coding' for label in y_artificial]
-    # 生成预测结果的 CSV
     output_df = pd.DataFrame({
         'true_label': true_label,
         'prediction_label': prediction_label,
