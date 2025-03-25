@@ -2,8 +2,14 @@
 
 LMFE (lncRNA Multi-Feature Fusion Ensemble Learning) is a Python-based tool designed to extract features from RNA sequences, train machine learning models, and evaluate their performance in classifying sequences as either long non-coding RNA (lncRNA) or messenger RNA (mRNA). The tool supports a variety of feature extraction methods, multiple machine learning algorithms, and evaluation metrics.
 
+
 This guide provides instructions on how to set up, run, and interpret results from LMFE using the provided scripts.
 # Prerequisites
+## Dataset
+* The data in the dataset folder is file data
+* The benchmark folder is the benchmark dataset, which contains data of 10 species
+* The independent folder is the independent test set, which contains datasets of 6 species
+* The unbalanced folder is the unbalanced dataset, which contains datasets of 4 species
 ## Software Requirements
 
 Python 3.x: Ensure Python is installed on your system.<br>
