@@ -109,12 +109,12 @@ Edit train_evaluate.py to specify training parameters:
 ```python
 specie_name = 'All_species'
 subfold = 'F_1'
-optimumTrainDataPath = f'../Files/{subfold}/optimumTrainDataset_All_speices_sequences.csv'
-optimumTestDataPath = f'../Files/{subfold}/optimumTestDataset_All_speices_sequences.csv'
+TrainDataPath = f'../Files/{subfold}/TrainDataset_All_speices_sequences.csv'
+TestDataPath = f'../Files/{subfold}/TestDataset_All_speices_sequences.csv'
 choices = {'XGB': 1}  # Enable XGBoost
 argsForTrain = {
-    'optimunTrainDataPath': optimumTrainDataPath,
-    'optimunTestDataPath': optimumTestDataPath,
+    'optimunTrainDataPath': TrainDataPath,
+    'optimunTestDataPath': TestDataPath,
     'model': choices,
     'specieName': specie_name,
     'subfold': subfold
@@ -163,10 +163,10 @@ python run_different_methods.py
 Edit run_different_methods.py:
 ```
 ```python
-optimumAllDataPath = '../Files/F_1/optimumAllDataset_All_speices_sequences.csv'
+AllDataPath = '../Files/F_1/AllDataset_All_speices_sequences.csv'
 argsForClassifier = {
     'nFCV': 5,  # Number of folds for cross-validation
-    'dataset': optimumAllDataPath,
+    'dataset': AllDataPath,
     'auROC': 1, 'boxPlot': 1, 'accPlot': 1, 'timePlot': 1
 }
 differentMethods.runDifferentMethods(argsForClassifier)
