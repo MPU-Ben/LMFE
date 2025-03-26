@@ -189,7 +189,7 @@ python [feature_selection_script_name].py
 # Interpreting Results
 * Metrics: Key metrics include:
 * Accuracy: Percentage of correctly classified sequences.
-* auROC: Area under the Receiver Operating Characteristic curve.
+* ROC: Area under the Receiver Operating Characteristic curve.
 * F1 Score: Harmonic mean of precision and recall.
 * MCC: Matthews Correlation Coefficient.
 * Predictions: Check the LMFE_[specieName]_predictions.csv file for true labels, predicted labels, and probabilities.
