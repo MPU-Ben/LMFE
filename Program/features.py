@@ -166,10 +166,8 @@ def gF(X, Y, ss_path, **args):
         stop_codons = codon_table.stop_codons  # ["UAA", "UAG", "UGA"]
 
         for sequence in x:
-            # 转换为RNA序列
             # rna_sequence = sequence.replace('T', 'U')
             seq = Seq(sequence)
-            # 计算正向链上的ORF覆盖率
             forward_coverage = 0
             for i in range(len(seq) - 2):
                 codon = str(seq[i:i + 3])
@@ -188,45 +186,37 @@ def gF(X, Y, ss_path, **args):
         T = [row_a + row_b for row_a, row_b in zip(T, tmp_t)] if len(T) > 0 else tmp_t
 
     def orf_length(x):
-        # 初始化结果列表
         tmp_t = []
         feature_names = ['ORFs_Length']
         tmp_t.append(feature_names)
-        # 使用通用 RNA 遗传密码表
         codon_table = unambiguous_rna_by_name["Standard"]
         start_codons = codon_table.start_codons  # ["AUG"]
         stop_codons = codon_table.stop_codons  # ["UAA", "UAG", "UGA"]
-        # 遍历每个序列
         for sequence in x:
             seq = Seq(sequence)
-            # 初始化 ORF 总长度
+
             total_orf_length = 0
             current_length = 0
             in_orf = False
-
-            # 遍历序列以查找 ORF
             for i in range(0, len(seq) - 2, 3):
                 codon = str(seq[i:i + 3])
 
                 if not in_orf and codon in start_codons:
                     in_orf = True
-                    current_length = 3  # 起始密码子长度
+                    current_length = 3  
                 elif in_orf:
                     if codon in stop_codons:
                         in_orf = False
-                        total_orf_length += current_length  # 将当前 ORF 长度加入总长度
+                        total_orf_length += current_length  
                         current_length = 0
                     else:
-                        current_length += 3  # 增加长度
-
-            # 检查最后一个 ORF
+                        current_length += 3  
+ 
             if in_orf and current_length > 0:
-                total_orf_length += current_length  # 将最后一个 ORF 的长度加入总长度
+                total_orf_length += current_length  
 
-            # 将总 ORF 长度添加到结果中
             tmp_t.append([total_orf_length])
 
-        # 更新全局 T
         global T
         T = [row_a + row_b for row_a, row_b in zip(T, tmp_t)] if len(T) > 0 else tmp_t
 
@@ -241,7 +231,6 @@ def gF(X, Y, ss_path, **args):
         for sequence in x:
             orf_count = 0
             seq = Seq(sequence)
-            # 搜索正向链
             for i in range(len(seq) - 2):
                 codon = str(seq[i:i + 3])
                 if codon in start_codons:
