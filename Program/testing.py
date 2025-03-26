@@ -12,7 +12,6 @@ def evaluate(args):
     subfold = args['subfold']
     D = pd.read_csv(args['testDatasetPath'])
     all_columns = D.columns.tolist()
-    # 移除标签名列
     label_name = 'label'
     feature_columns = [col for col in all_columns if col != label_name]
     feature_names = feature_columns
@@ -67,7 +66,6 @@ def testModel(X_test, y_test, subfold,feature_names):
 def evaluateByOtherSpeice(args):
     D = pd.read_csv(args['AllDataset'])
     all_columns = D.columns.tolist()
-    # 移除标签名列
     label_name = 'label'
     feature_columns = [col for col in all_columns if col != label_name]
     feature_names = feature_columns
@@ -128,7 +126,6 @@ def evalModel(X, y, specieName, subfold, feature_names):
     specieNames.append(specieName)
     precisions.append(precision)
     recalls.append(recall)
-    # 处理预测概率
     if y_proba.ndim == 1:
         non_coding_probability =  y_proba
         coding_probability = 1 - y_proba
